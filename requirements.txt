@@ -1,0 +1,3 @@
+maskpass==1.3.0
+bcrypt==4.0.1
+cryptography==41.0.3
