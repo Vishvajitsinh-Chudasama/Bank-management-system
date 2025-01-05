@@ -334,15 +334,15 @@ def main():
                                                 another_user_data = Check_Account_Number_Exist(Transfer_account,User_detail_file)
                                                 if None != another_user_data:
                                                     another_dict = decrypte_data(another_user_data.encode())
-                                                    another_dict["Bank_Balanace"] += amount_to_debit
-                                                    User_dict["Bank_Balanace"] -= amount_to_debit
+                                                    another_dict["Bank_Balance"] += amount_to_debit
+                                                    User_dict["Bank_Balance"] -= amount_to_debit
                                                     if Add_data_to_json_file(User_dict,User_detail_file) & Add_data_to_json_file(another_dict,User_detail_file):
                                                         time = datetime.now()
                                                         Transaction_debit = [User_account_number,f"Transfer to {Transfer_account}","Debit",amount_to_debit,str(time)]
                                                         Transaction_credit = [Transfer_account,f"Transfer from {User_account_number}","credit",amount_to_debit,str(time)]
                                                         if Add_data_to_json_file(Transaction_debit,USER_Transaction_FILE) & Add_data_to_json_file(Transaction_credit,USER_Transaction_FILE):
                                                             print(f"{amount_to_debit} is debited from {User_account_number} and credit to {Transfer_account}.")
-                                                            print(f"Remaining bank balance is {User_dict['Bank_Balanace']}")
+                                                            print(f"Remaining bank balance is {User_dict['Bank_Balance']}")
                                                             input("Press enter to continue.......")
                                                 else:
                                                     print(f"Account number not exist : {Transfer_account}.")
@@ -356,7 +356,7 @@ def main():
                                             message = show_Transaction_hestory(User_account_number)
                                             print(message)
                                             mail = input("If you want transaction history to mail then press\"y\" : ")
-                                            if mail == "y" | mail == "Y":
+                                            if (mail == "y") or (mail == "Y"):
                                                 send_otp(User_dict["User_Email_id"],f"{space("Transaction history")}{message}")
                                             input("Press enter to coniune.......")
                                         case 6:
@@ -369,7 +369,7 @@ def main():
                                                     Transaction = [User_account_number,"Bank","Credit",amount_to_credit,str(datetime.now())]
                                                     if Add_data_to_json_file(Transaction,USER_Transaction_FILE):
                                                         print(f"{amount_to_credit} is credited to {User_account_number}.")
-                                                        print(f"remanig bank balance is {User_dict['Bank_Balanace']}")
+                                                        print(f"remanig bank balance is {User_dict['Bank_Balance']}")
                                             input("Press enter to continue.....")
                                         case 7:
                                             break
